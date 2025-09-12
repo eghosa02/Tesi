@@ -2,6 +2,12 @@
 
 \usepackage{colorprofiles}
 
+\usepackage[a4paper,
+            left=25mm,
+            right=25mm,
+            top=25mm,
+            bottom=20mm]{geometry}
+
 % PDF/A
 % validate in https://www.pdf-online.com/osa/validate.aspx
 \usepackage[a-2b,mathxmp]{pdfx}
@@ -39,7 +45,7 @@
 
 \usepackage{listings}                   % codici
 
-\usepackage{microtype}                  % microtipografia
+\usepackage[expansion=false]{microtype} % microtipografia (font expansion disabled)
 
 \usepackage{mparhack,relsize}           % finezze tipografiche
 

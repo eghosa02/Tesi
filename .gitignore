@@ -222,7 +222,6 @@ TSWLatexianTemp*
 # compile script build directory
 build/
 
-# produced pdf
 *thesis.pdf
 
 *.txt

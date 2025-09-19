@@ -62,6 +62,13 @@
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/"> 
    <dc:format>application/pdf</dc:format> 
+   <dc:title><rdf:Alt><rdf:li xml:lang="x-default">Relazione Finale</rdf:li></rdf:Alt></dc:title>
+   <dc:creator><rdf:Seq><rdf:li>Eghosa Matteo Igbinedion-Osamwonyi</rdf:li></rdf:Seq></dc:creator>
+   <dc:language><rdf:Bag><rdf:li>it-IT</rdf:li></rdf:Bag></dc:language>
+   <dc:description><rdf:Alt><rdf:li xml:lang="x-default">Relazione Finalen</rdf:li></rdf:Alt></dc:description>
+   <dc:subject><rdf:Bag><rdf:li>Tesi</rdf:li>
+     <rdf:li>Unipd</rdf:li>
+     <rdf:li>IA</rdf:li></rdf:Bag></dc:subject>
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:prism="http://prismstandard.org/namespaces/basic/2.2/"> 
   </rdf:Description> 
@@ -73,15 +80,15 @@
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/"> 
    <xmp:CreatorTool>LaTeX with hyperref</xmp:CreatorTool> 
-   <xmp:ModifyDate>2025-09-19T13:31:18+02:00</xmp:ModifyDate> 
-   <xmp:CreateDate>2025-09-19T13:31:18+02:00</xmp:CreateDate> 
-   <xmp:MetadataDate>2025-09-19T13:31:18+02:00</xmp:MetadataDate> 
+   <xmp:ModifyDate>2025-09-19T13:31:27+02:00</xmp:ModifyDate> 
+   <xmp:CreateDate>2025-09-19T13:31:27+02:00</xmp:CreateDate> 
+   <xmp:MetadataDate>2025-09-19T13:31:27+02:00</xmp:MetadataDate> 
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:xmpRights = "http://ns.adobe.com/xap/1.0/rights/"> 
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"> 
    <xmpMM:DocumentID>uuid:D7C580CD-C713-1C98-0B13-CC7E0DCB0866</xmpMM:DocumentID> 
-   <xmpMM:InstanceID>uuid:A95045A1-5E4E-E4FB-FA9D-694F6099A401</xmpMM:InstanceID> 
+   <xmpMM:InstanceID>uuid:4BCC7719-3829-CA92-AA0B-3D511B8086AE</xmpMM:InstanceID> 
   </rdf:Description> 
  </rdf:RDF> 
 </x:xmpmeta> 

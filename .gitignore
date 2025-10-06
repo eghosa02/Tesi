@@ -222,22 +222,24 @@ TSWLatexianTemp*
 # compile script build directory
 build/
 
-*thesis.pdf
+#*thesis.pdf
 
-*.txt
+#*.txt
 
-*.tex
+#*.tex
 
 *.xmpdata
 
 *.xmpi
 
-/appendix
+*.xml
 
-/chapters
+#/appendix
 
-/config
+#/chapters
 
-/images
+#/config
 
-/preface
+#/images
+
+#/preface

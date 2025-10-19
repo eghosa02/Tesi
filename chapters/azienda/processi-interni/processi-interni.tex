@@ -1,29 +1,52 @@
 \section{Processi interni}
 
-Le informazioni qui riportate derivano da osservazione diretta del mio ambiente di lavoro e da brevi confronti con il tutor interno; 
-durante i due mesi di stage ho svolto il progetto in larga parte in autonomia, perciò la mia percezione dei processi si basa per lo più da quanto accennato dal tutor aziendale
-e da alcune conversazioni avuto con i membri del team e non sono dunque esaustive.
-
+Le informazioni qui riportate derivano da osservazione diretta del mio ambiente di lavoro e da confronti brevi con il tutor interno; 
+durante i due mesi di stage ho svolto il progetto in larga parte in autonomia, perciò la mia percezione dei processi si basa prevalentemente su quanto mi è stato illustrato dal tutor aziendale 
+e su alcune conversazioni avute con i membri del \emph{team}, e non pretende di essere esaustiva.
 
 \medskip
 \noindent\textbf{Processo di sviluppo}
-Il processo di sviluppo prevede l'adozione di strumenti specifici per risolvere le problematiche dedite al \emph{Versioning}, allineamento e archiviazione del contenuto digitale.
-Avendo assistito alle conversazione tra i membri del team in cui lamentavano alcuni aspetti su cui stavano singolamente lavorando, è stato possibile evincere come esista
-una fase di definizione del problema con suddivisione in \emph{task} tali da essere assegnabili ad un singolo membro del team.
-Lo strumento di creazione e assegnazione delle \emph{tasks}, ho potuto constatare visivamente essere \emph{Jira} (strumento di gestione dei progetti e del lavoro).
-Durante la fase di codifica a caduta quotidiana, sono prersenti \emph{stand-up meetings} al fine di mantenere un allineamento tra i membri del \emph{team} andando ad esplicare
-quanto fatto la giorana passata e quanto da fare la giornata seguente.
-Alla fine di ogni \emph{task} segue la relativa fase di verifica da parte di un altro membro del \emph{team}.
 
+Il processo di sviluppo si articola in fasi distinte ma integrate: individuazione e definizione del problema, 
+scomposizione in attività eseguibili, implementazione, verifica e rilascio. 
+Per la gestione del codice e del \emph{versioning} si utilizzano strumenti dedicati (controllo di versione distribuito, repository remoti) e, 
+parallelamente, si impiegano sistemi per tracciare le attività e le priorità. Dalle conversazioni tra i membri del \emph{team} ho rilevato l’esistenza di una fase iniziale di 
+analisi in cui il problema viene chiarito e suddiviso in \emph{task} di dimensione tale da poter essere assegnata a un singolo sviluppatore; questa scomposizione agevola la 
+responsabilizzazione dei singoli e il monitoraggio dei progressi.
+
+Lo strumento visivamente riconoscibile per la creazione, 
+l’assegnazione e il monitoraggio delle \emph{tasks} è \emph{Jira}, che funge da punto di riferimento per lo stato dei lavori, le descrizioni delle attività e i commenti di avanzamento. 
+Durante la fase di sviluppo giornaliera sono previste brevi \emph{stand-up meetings} (riunioni di sincronizzazione) con l’obiettivo di condividere quanto svolto nella giornata precedente, 
+segnalare impedimenti e pianificare le attività immediate; queste riunioni favoriscono l’allineamento del \emph{team} e la rapida emersione di blocchi tecnici.
+
+Al completamento di ogni \emph{task} è prevista una fase di verifica da parte di un altro membro del \emph{team} (code review): 
+tale pratica viene svolta sia per assicurare qualità e conformità agli standard interni sia per favorire la diffusione delle conoscenze. 
+Quando possibile, il rilascio del codice avviene seguendo procedure automatizzate che includono build e test automatici; ove presenti, 
+pipeline di integrazione continua vengono attivate prima del merge verso i rami principali, riducendo il rischio di regressioni.
 
 \medskip
 \noindent\textbf{Processo di organizzazione}
-Il processo di organizzazione segue una logica comunicativa stratificata per livello di formalità e contesto.
-Un organizazione lato presenze in ufficio, richieste di informazioni di stampo logistico avvengono tramite \emph{Slack}.
-Per interazioni legate a dubbi, chiarimenti e altro riguardo le \emph{tasks}, avvengono nei \emph{branches} dedicati su \emph{Jira}.
-Le comunicazioni di stampo più formale e/o burrocratiche avvengono per \emph{email}.
 
+L’organizzazione della comunicazione è stratificata in base al livello di formalità e alla finalità: 
+comunicazioni rapide e operative avvengono su \emph{Slack}, che viene utilizzato per la pianificazione quotidiana delle presenze, richieste logistiche e notifiche veloci; 
+per questioni tecniche più specifiche e per lo scambio su singole \emph{tasks} si sfruttano i \emph{branches} e i commenti collegati alle issue in \emph{Jira}, 
+dove rimane tracciata la cronologia delle decisioni e delle discussioni tecniche. Le comunicazioni formali, amministrative o di carattere aziendale più strutturato vengono invece inviate tramite \emph{email}.
 
+La documentazione di progetto è mantenuta in repository condivisi o in spazi dedicati (wiki, documenti di progetto): 
+questo facilita il reperimento di informazioni, la consultazione delle linee guida e la storage delle specifiche. 
+Ho notato che, nonostante esista una struttura di comunicazione definita, la pratica quotidiana lascia spazio a scambi informali che spesso risolvono rapidamente piccoli 
+problemi ma che possono anche richiedere successiva formalizzazione quando le decisioni impattano sul piano di rilascio.
+
+Non sono stato coinvolto nelle attività di manutenzione continuativa del sistema, né ho avuto discussioni approfondite con il tutor o con i membri del \emph{team} su procedure 
+operative relative al supporto post-rilascio; pertanto non posso fornire dettagli completi su quel processo.
+
+\medskip
+\noindent\textbf{Osservazioni riassuntive e suggerimenti}
+
+Dall’esperienza osservativa emergono alcuni punti di forza e margini di miglioramento: la presenza di pratiche consolidate (uso di \emph{Jira}, \emph{stand-up meetings}, code review) 
+favorisce trasparenza e tracciabilità, mentre l’adozione più ampia di procedure formali per la documentazione delle decisioni tecniche potrebbe ridurre la dipendenza dalle comunicazioni informali. 
+Sarebbe utile, a mio avviso, integrare nell’onboarding materiali che esplicitino il ciclo di vita di una \emph{task}, le convenzioni di \emph{versioning} adottate e le regole per le code review, 
+in modo da velocizzare l’inserimento operativo dei nuovi membri del \emph{team}.
 %Processo di sviluppo:
 %\begin{itemize}
 %\item assegnazione delle attività tramite \emph{Jira} (strumento di gestione dei progetti e del lavoro).
@@ -39,4 +62,4 @@ Le comunicazioni di stampo più formale e/o burrocratiche avvengono per \emph{em
 %    \item ogni comunicazione di stampo più formale non orientata ad una task nello specifico (contesto burroscratico) avviene tramite email.
 %\end{itemize}
 
-Non sono stato coinvolto in attività legate al loro processo di manutenzione, né posso dire di averne discusso con il tutor aziendale o con i membri del team.
+%Non sono stato coinvolto in attività legate al loro processo di manutenzione, né posso dire di averne discusso con il tutor aziendale o con i membri del team.

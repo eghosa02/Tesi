@@ -12,6 +12,14 @@ integrazioni con sistemi esterni per sincronizzare cataloghi, ordini e dati anag
 e automatizza attività di marketing e customer care. Dal punto di vista operativo richiede competenze specifiche per la gestione delle estensioni, delle API e dei processi di deployment 
 verso ambienti proprietari della piattaforma.
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/azienda/architettura_tecnologica.svg}
+    \caption{Architettura tecnologica osservata: le principali piattaforme e i flussi di integrazione tra e-commerce, personalizzazione, integrazione e deployment.}
+    \label{fig:architettura_tecnologica}
+\end{figure}
+
+
 \medskip
 \noindent\textbf{Bloomreach}
 \emph{Bloomreach} (piattaforma per ricerca avanzata e personalizzazione della \emph{customer journey}): utilizzata in progetti di scala per migliorare la rilevanza delle ricerche 
@@ -24,6 +32,16 @@ Cloud e piattaforme di \emph{deployment}: \emph{AWS}, \emph{Google Cloud} e \emp
 Queste piattaforme vengono impiegate per ospitare servizi applicativi, database e risorse di caching; la scelta tra le piattaforme è dettata da vincoli di progetto, integrazioni richieste e costi operativi. 
 Sul cloud si realizzano inoltre configurazioni per il \emph{scaling} automatico, il bilanciamento del carico e la gestione dei certificati TLS. Per l’infrastruttura 
 è comune l’adozione di pratiche di \emph{infrastructure as code} (ad es. strumenti che consentono il provisioning ripetibile delle risorse).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{images/azienda/pipeline_cicd.svg}
+    \caption{Pipeline di integrazione e distribuzione continua: dal commit alla promozione in produzione.}
+    \label{fig:pipeline_cicd}
+\end{figure}
+
+% [Develop] → [Commit su Git] → [CI Build] → [Test automatici] → [Code review / Pull Request] → [Merge su main] → [Deploy su Staging] → [Verifica] → [Deploy in Production]
+
 
 \medskip
 \noindent\textbf{iPaaS}

@@ -26,7 +26,7 @@ pipeline di integrazione continua vengono attivate prima del merge verso i rami 
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.9\textwidth]{azienda/processo_sviluppo}
+    \includegraphics[width=0.8\textwidth]{azienda/processo_sviluppo}
     \caption{Flusso del processo di sviluppo adottato, dalle fasi di analisi al rilascio, con tracciamento in Jira e verifica.}
     \label{fig:processo_sviluppo}
 \end{figure}
@@ -41,6 +41,13 @@ comunicazioni rapide e operative avvengono su \emph{Slack}, che viene utilizzato
 per questioni tecniche più specifiche e per lo scambio su singole \emph{tasks} si sfruttano i \emph{branches} e i commenti collegati alle issue in \emph{Jira}, 
 dove rimane tracciata la cronologia delle decisioni e delle discussioni tecniche. Le comunicazioni formali, amministrative o di carattere aziendale più strutturato vengono invece inviate tramite \emph{email}.
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{azienda/comunicazione}
+    \caption{Struttura dei canali di comunicazione interni e grado di formalità associato.}
+    \label{fig:comunicazione}
+\end{figure}
+
 La documentazione di progetto è mantenuta in repository condivisi o in spazi dedicati (wiki, documenti di progetto): 
 questo facilita il reperimento di informazioni, la consultazione delle linee guida e la storage delle specifiche. 
 Ho notato che, nonostante esista una struttura di comunicazione definita, la pratica quotidiana lascia spazio a scambi informali che spesso risolvono rapidamente piccoli 
@@ -50,23 +57,17 @@ Non sono stato coinvolto nelle attività di manutenzione continuativa del sistem
 operative relative al supporto post-rilascio; pertanto non posso fornire dettagli completi su quel processo.
 
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.9\textwidth]{azienda/comunicazione}
-    \caption{Struttura dei canali di comunicazione interni e grado di formalità associato.}
-    \label{fig:comunicazione}
-\end{figure}
 
 %Livello 1 (informale): Slack → comunicazioni rapide, Livello 2 (operativo): Jira → commenti tecnici, task tracking, Livello 3 (formale): Email → comunicazioni aziendali, amministrative, Livello trasversale: Wiki / Repository → documentazione e specifiche
 
 
-\medskip
-\noindent\textbf{Osservazioni riassuntive e suggerimenti}
+%\medskip
+%\noindent\textbf{Osservazioni riassuntive e suggerimenti}
 
-Dall’esperienza osservativa emergono alcuni punti di forza e margini di miglioramento: la presenza di pratiche consolidate (uso di \emph{Jira}, \emph{stand-up meetings}, code review) 
-favorisce trasparenza e tracciabilità, mentre l’adozione più ampia di procedure formali per la documentazione delle decisioni tecniche potrebbe ridurre la dipendenza dalle comunicazioni informali. 
-Sarebbe utile, a mio avviso, integrare nell’onboarding materiali che esplicitino il ciclo di vita di una \emph{task}, le convenzioni di \emph{versioning} adottate e le regole per le code review, 
-in modo da velocizzare l’inserimento operativo dei nuovi membri del \emph{team}.
+%Dall’esperienza osservativa emergono alcuni punti di forza e margini di miglioramento: la presenza di pratiche consolidate (uso di \emph{Jira}, \emph{stand-up meetings}, code review) 
+%favorisce trasparenza e tracciabilità, mentre l’adozione più ampia di procedure formali per la documentazione delle decisioni tecniche potrebbe ridurre la dipendenza dalle comunicazioni informali. 
+%Sarebbe utile, a mio avviso, integrare nell’onboarding materiali che esplicitino il ciclo di vita di una \emph{task}, le convenzioni di \emph{versioning} adottate e le regole per le code review, 
+%in modo da velocizzare l’inserimento operativo dei nuovi membri del \emph{team}.
 %Processo di sviluppo:
 %\begin{itemize}
 %\item assegnazione delle attività tramite \emph{Jira} (strumento di gestione dei progetti e del lavoro).

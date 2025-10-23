@@ -12,12 +12,10 @@ aggiornati i profili dei clienti collegando la piattaforma ad altri sistemi azie
 La piattaforma facilita la personalizzazione dell’esperienza d’acquisto grazie a regole commerciali e strumenti di segmentazione: è possibile mostrare contenuti, 
 offerte e percorsi diversi a seconda del cliente o del canale. Allo stesso tempo automatizza molte attività di marketing e customer care (campagne, promozioni, 
 follow-up post-acquisto e ticket di assistenza) riducendo lavoro manuale e tempi di risposta.
-Dal punto di vista pratico, l’adozione richiede competenze specifiche: serve saper configurare estensioni, usare le API per le integrazioni e gestire il processo di 
-rilascio (deployment) verso gli ambienti cloud della piattaforma.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.9\textwidth]{azienda/architettura_tecnologica}
+    \includegraphics[width=0.8\textwidth]{azienda/architettura_tecnologica}
     \caption{Architettura tecnologica osservata: le principali piattaforme e i flussi di integrazione tra e-commerce, personalizzazione, integrazione e deployment.}
     \label{fig:architettura_tecnologica}
 \end{figure}
@@ -31,9 +29,16 @@ e per orchestrare contenuti e offerte personalizzate lungo tutto il percorso di 
 Nella pratica, \emph{Bloomreach} combina segnali comportamentali, dati di prodotto e informazioni di profilo per alimentare ranking dei risultati, raccomandazioni, 
 regole di \emph{merchandising} e landing page dinamiche; spesso è integrata con il \emph{CMS} e il \emph{CRM} così da arricchire i profili utente e offrire esperienze 
 realmente \emph{omnichannel} (sito, app, email e punti vendita).
-I benefici tipici sono una scoperta prodotti più veloce, tassi di conversione più alti e percorsi d’acquisto più coerenti per il cliente. Dal punto di vista operativo 
+I benefici tipici sono una scoperta prodotti più veloce e percorsi d’acquisto più coerenti per il cliente. Dal punto di vista operativo 
 richiede però lavoro di integrazione: mappare correttamente il catalogo e i feed, definire le regole di \emph{merchandising}, impostare metriche di rilevanza e 
-continuare a fare \emph{A/B testing} per ottimizzare i risultati.
+continuare a fare \emph{testing} () per ottimizzare i risultati.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{azienda/bloomreach}
+    \caption{Diagramma che mostra come segnali comportamentali, dati di catalogo e profili utente alimentano ranking, raccomandazioni, regole di merchandising e landing dinamiche.}
+    \label{fig:bloomreach}
+\end{figure}
 
 \medskip
 \noindent\textbf{deployment}
@@ -53,9 +58,9 @@ Per l’infrastruttura è ormai comune l’adozione di pratiche di \emph{infrast
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.85\textwidth]{azienda/deployment}
+    \includegraphics[width=0.8\textwidth]{azienda/deployment}
     \caption{Pipeline di integrazione e distribuzione continua: dal commit alla promozione in produzione.}
-    \label{fig:pipeline_cicd}
+    \label{fig:deployment}
 \end{figure}
 
 % [Develop] → [Commit su Git] → [CI Build] → [Test automatici] → [Code review / Pull Request] → [Merge su main] → [Deploy su Staging] → [Verifica] → [Deploy in Production]
@@ -77,7 +82,7 @@ in tempo reale o a batch, impostare regole di mapping dei dati, e centralizzare 
 \noindent\textbf{Gestione progetto}
 Strumenti di gestione progetto e comunicazione: \emph{Jira} per il tracciamento delle attività e \emph{Slack} per la comunicazione operativa quotidiana. \emph{Jira} 
 viene usato per definire le \emph{issue}, assegnare priorità, documentare criteri di accettazione e tenere traccia dello stato di avanzamento; \emph{Slack} 
-è lo strumento preferito per aggiornamenti rapidi, notifiche dagli strumenti di integrazione (build, deploy, alert) e conversazioni sincrone o asincrone tra membri del \emph{team}.
+è lo strumento preferito per aggiornamenti rapidi e conversazioni sincrone o asincrone tra membri del \emph{team}.
 
 \medskip
 \noindent\textbf{Git}

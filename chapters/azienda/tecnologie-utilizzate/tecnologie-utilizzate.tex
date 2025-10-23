@@ -6,15 +6,18 @@ Di seguito viene fornita una descrizione estesa delle tecnologie principali e de
 
 \medskip
 \noindent\textbf{Salesforce Commerce Cloud}
-\emph{Salesforce Commerce Cloud} e relativi moduli \emph{Service Cloud} / \emph{Marketing Cloud} (suite \emph{enterprise} per commercio, servizio clienti e automazione marketing): 
-queste piattaforme vengono impiegate per realizzare soluzioni di commercio elettronico e gestione clienti sia in ambito \emph{B2B} che \emph{B2C}. Nell’uso osservato, la suite supporta 
-integrazioni con sistemi esterni per sincronizzare cataloghi, ordini e dati anagrafici; consente la personalizzazione della \emph{customer experience} tramite regole di business e strumenti di segmentazione,
-e automatizza attività di marketing e customer care. Dal punto di vista operativo richiede competenze specifiche per la gestione delle estensioni, delle API e dei processi di deployment 
-verso ambienti proprietari della piattaforma.
+\emph{Salesforce Commerce Cloud} insieme ai moduli \emph{Service Cloud} e \emph{Marketing Cloud} è una suite pensata per gestire vendite online, assistenza clienti e 
+attività di marketing in modo integrato. Viene usata sia per soluzioni \emph{B2B} che \emph{B2C} e permette di costruire cataloghi prodotti, gestire ordini e mantenere 
+aggiornati i profili dei clienti collegando la piattaforma ad altri sistemi aziendali (per esempio ERP, sistemi di magazzino o gateway di pagamento).
+La piattaforma facilita la personalizzazione dell’esperienza d’acquisto grazie a regole commerciali e strumenti di segmentazione: è possibile mostrare contenuti, 
+offerte e percorsi diversi a seconda del cliente o del canale. Allo stesso tempo automatizza molte attività di marketing e customer care (campagne, promozioni, 
+follow-up post-acquisto e ticket di assistenza) riducendo lavoro manuale e tempi di risposta.
+Dal punto di vista pratico, l’adozione richiede competenze specifiche: serve saper configurare estensioni, usare le API per le integrazioni e gestire il processo di 
+rilascio (deployment) verso gli ambienti cloud della piattaforma.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.9\textwidth]{images/azienda/architettura_tecnologica}
+    \includegraphics[width=0.9\textwidth]{azienda/architettura_tecnologica}
     \caption{Architettura tecnologica osservata: le principali piattaforme e i flussi di integrazione tra e-commerce, personalizzazione, integrazione e deployment.}
     \label{fig:architettura_tecnologica}
 \end{figure}
@@ -22,33 +25,53 @@ verso ambienti proprietari della piattaforma.
 
 \medskip
 \noindent\textbf{Bloomreach}
-\emph{Bloomreach} (piattaforma per ricerca avanzata e personalizzazione della \emph{customer journey}): utilizzata in progetti di scala per migliorare la rilevanza delle ricerche 
-interne al sito e per orchestrare contenuti personalizzati lungo il percorso di acquisto. Bloomreach funge da livello di personalizzazione e ricerca ad alto throughput, spesso integrato 
-con il \emph{CMS} e il \emph{CRM} per arricchire i profili utente e abilitare esperienze omnicanale.
+\emph{Bloomreach} è una piattaforma pensata per migliorare la ricerca interna e personalizzare la \emph{customer journey} in modo più intelligente e mirato. 
+Viene impiegata soprattutto in progetti di scala per rendere le ricerche sul sito più pertinenti (per esempio mostrando risultati, suggerimenti e filtri che si adattano al contesto dell’utente) 
+e per orchestrare contenuti e offerte personalizzate lungo tutto il percorso di acquisto.
+Nella pratica, \emph{Bloomreach} combina segnali comportamentali, dati di prodotto e informazioni di profilo per alimentare ranking dei risultati, raccomandazioni, 
+regole di \emph{merchandising} e landing page dinamiche; spesso è integrata con il \emph{CMS} e il \emph{CRM} così da arricchire i profili utente e offrire esperienze 
+realmente \emph{omnichannel} (sito, app, email e punti vendita).
+I benefici tipici sono una scoperta prodotti più veloce, tassi di conversione più alti e percorsi d’acquisto più coerenti per il cliente. Dal punto di vista operativo 
+richiede però lavoro di integrazione: mappare correttamente il catalogo e i feed, definire le regole di \emph{merchandising}, impostare metriche di rilevanza e 
+continuare a fare \emph{A/B testing} per ottimizzare i risultati.
 
 \medskip
 \noindent\textbf{deployment}
-Cloud e piattaforme di \emph{deployment}: \emph{AWS}, \emph{Google Cloud} e \emph{Heroku} per hosting, provisioning di risorse scalabili e ambienti di \emph{staging} e \emph{production}. 
-Queste piattaforme vengono impiegate per ospitare servizi applicativi, database e risorse di caching; la scelta tra le piattaforme è dettata da vincoli di progetto, integrazioni richieste e costi operativi. 
-Sul cloud si realizzano inoltre configurazioni per il \emph{scaling} automatico, il bilanciamento del carico e la gestione dei certificati TLS. Per l’infrastruttura 
-è comune l’adozione di pratiche di \emph{infrastructure as code} (ad es. strumenti che consentono il provisioning ripetibile delle risorse).
+Le piattaforme cloud e di \emph{deployment} (ad esempio \emph{AWS}, \emph{Google Cloud} e \emph{Heroku}) vengono utilizzate per ospitare le applicazioni, 
+allocare risorse scalabili e creare ambienti distinti per sviluppo e collaudo (\emph{staging}) e per il traffico reale (\emph{production}). 
+In pratica offrono servizi di \emph{hosting}, \emph{provisioning} delle risorse (CPU, memoria, storage) e strumenti per distribuire il codice in modo ripetibile.
+
+Queste piattaforme sono il luogo dove risiedono i servizi applicativi, i \emph{database} e le risorse di \emph{caching}, 
+e permettono di tenere separate le istanze di test da quelle in produzione per evitare impatti agli utenti. La scelta tra \emph{AWS}, \emph{Google Cloud} o \emph{Heroku} 
+dipende spesso da vincoli progettuali, integrazioni richieste (per esempio con specifici servizi gestiti), competenze del team e considerazioni sui costi operativi.
+
+Sul piano operativo si configurano meccanismi per il \emph{scaling} automatico, la distribuire del traffico, 
+la gestione dei certificati \emph{TLS} per la sicurezza e sistemi di \emph{monitoring} e \emph{backup} per garantire disponibilità e resilienza. 
+Inoltre si possono impostare pipeline di \emph{CI/CD} per automatizzare build, test e deployment, così da rendere le release più veloci e meno soggette a errori manuali.
+
+Per l’infrastruttura è ormai comune l’adozione di pratiche di \emph{infrastructure as code} (strumenti che consentono il \emph{provisioning} ripetibile e tracciabile delle risorse). 
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.85\textwidth]{images/azienda/pipeline_cicd}
+    \includegraphics[width=0.85\textwidth]{azienda/deployment}
     \caption{Pipeline di integrazione e distribuzione continua: dal commit alla promozione in produzione.}
     \label{fig:pipeline_cicd}
 \end{figure}
 
 % [Develop] → [Commit su Git] → [CI Build] → [Test automatici] → [Code review / Pull Request] → [Merge su main] → [Deploy su Staging] → [Verifica] → [Deploy in Production]
 
-
 \medskip
 \noindent\textbf{iPaaS}
-Strumenti di integrazione: approcci punto a punto e soluzioni \emph{iPaaS} (\emph{Integration Platform as a Service}: piattaforme per orchestrare integrazioni) 
-per orchestrare flussi dati fra \emph{CRM}, \emph{ERP}, piattaforme e-commerce e \emph{CMS}. L’impiego di un \emph{iPaaS} semplifica la gestione degli \emph{endpoint}, 
-la trasformazione dei payload e la gestione degli errori/ritentativi, riducendo la complessità rispetto a molteplici integrazioni punto-a-punto. Nei progetti osservati, 
-le integrazioni includono sincronizzazione ordini, anagrafiche clienti, disponibilità di magazzino e tracking degli eventi di marketing.
+Gli strumenti di integrazione includono approcci punto a punto e soluzioni \emph{iPaaS} (\emph{Integration Platform as a Service}: piattaforme per orchestrare integrazioni) 
+che collegano sistemi come \emph{CRM}, \emph{ERP}, piattaforme \emph{e-commerce} e \emph{CMS}. Mentre le integrazioni punto a punto creano connessioni dirette fra singoli sistemi, 
+un \emph{iPaaS} funge da livello centrale che orchestra i flussi di dati e i processi tra più applicazioni, rendendo l’architettura più semplice da governare e manutenere.
+
+L’adozione di un \emph{iPaaS} semplifica attività operative come la gestione degli \emph{endpoint} (i punti di scambio dati), la trasformazione dei \emph{payload} 
+(adattamento dei formati dati), e la gestione degli errori e dei tentativi di retry (meccanismi automatici per riprovare operazioni fallite). 
+Questo riduce la complessità rispetto a molte integrazioni punto a punto e velocizza l’onboarding di nuovi sistemi grazie a connettori riutilizzabili e template di integrazione.
+
+Un \emph{iPaaS} permette anche di scegliere fra modalità di integrazione 
+in tempo reale o a batch, impostare regole di mapping dei dati, e centralizzare logging e monitoraggio per individuare rapidamente problemi e colli di bottiglia.
 
 \medskip
 \noindent\textbf{Gestione progetto}
@@ -58,33 +81,38 @@ viene usato per definire le \emph{issue}, assegnare priorità, documentare crite
 
 \medskip
 \noindent\textbf{Git}
-Controllo versione e \emph{pipeline}: uso diffuso di \emph{Git}, \emph{pipeline} di integrazione continua (\emph{CI}) e distribuzione continua (\emph{CD}) e \emph{test} 
-automatici (ad esempio \emph{unit tests} e \emph{integration tests}) prima del rilascio. Il flusso di lavoro tipico prevede sviluppo su \emph{feature branches}, 
-apertura di \emph{pull request} per la revisione del codice (\emph{code review}), esecuzione automatica di test nella \emph{pipeline} e successiva promozione verso 
-ambienti di \emph{staging} e infine \emph{production}. Strategie di rilascio come \emph{blue/green} o \emph{canary} possono essere adottate per minimizzare il 
-rischio in produzione, così come meccanismi di rollback automatizzato in caso di regressione.
+\emph{Git} è il fulcro del controllo versione e del coordinamento del lavoro sul codice: 
+centrale non solo per conservare la storia delle modifiche, ma anche per organizzare come le nuove funzionalità arrivano nel prodotto finito. 
+Nella pratica quotidiana si privilegia un flusso basato su \emph{feature branches} (ognuna per una funzionalità o correzione), 
+apertura di \emph{pull request} per discutere e revisionare le modifiche (\emph{code review}) e l’uso di commit chiari e descrittivi per tracciare le decisioni.
 
-A livello operativo queste tecnologie si traducono in pratiche concrete (osservate però solo in parte durante lo stage) che includono:
-
+Il processo tipico ruota attorno a poche pratiche chiave (sempre legate a \emph{Git}):
 \begin{itemize}
-\item sviluppo su rami funzionali con revisioni del codice (\emph{code review}) formali e commenti tracciati tramite \emph{pull request} o meccanismi equivalenti;
-\item creazione e gestione di ambienti distinti di \emph{staging} e \emph{production} sul cloud, con pipeline che automatizzano build, test e deployment;
-\item esecuzione di \emph{test} automatici a livelli differenziati (\emph{unit}, \emph{integration}, \emph{end-to-end}) per garantire qualità e ridurre regressioni;
-\item strumenti di monitoraggio e \emph{logging} centralizzati per osservabilità e diagnosi (alerting su metriche critiche, raccolta dei log applicativi e centralizzazione dei tracciati di errore);
-\item pratiche di sicurezza e compliance applicate alle integrazioni e al trattamento dei dati (gestione di credenziali, accessi basati su ruoli, cifratura dei dati sensibili in transito e a riposo).
+\item sviluppo isolato su \emph{feature branches} e sincronizzazione regolare con il ramo principale per evitare divaricazioni troppo grandi;
+\item revisione del codice tramite \emph{pull request} con commenti, suggerimenti e approvazioni formali prima della fusione (merge);
+\item uso di convenzioni per i messaggi di commit e per i nomi dei rami (che aiutano a ricostruire la storia e a generare changelog);
+\item strategie di branching consolidate (per esempio \emph{GitFlow} o approcci basati su trunk) per coordinare rilasci, hotfix e lavoro parallelo su più versioni;
+\item gestione delle release tramite tag e rami dedicati alla versione (il tag identifica un punto preciso della storia come versione pubblicata);
+\item pratiche di sicurezza legate a \emph{Git} (protection dei rami principali, review obbligatorie, gestione degli accessi e firma dei commit) per ridurre il rischio di errori o modifiche non autorizzate;
+\item strumenti locali come le \emph{github-actions} (unità riutilizzabile di automazione che esegue compiti automaticamente in risposta a eventi del repository) e test eseguiti sul proprio ambiente prima di aprire la \emph{pull request} (ad esempio \emph{unit tests} e controlli statici), così da mantenere alta la qualità fin dal primo passo.
 \end{itemize}
 
-\medskip
+Dal punto di vista operativo, \emph{Git} abilita anche pratiche di rilascio sicure: le versioni vengono marcate con \emph{tag} e documentate con changelog, è possibile tornare indietro con \emph{revert} o \emph{cherry-pick} se serve correggere rapidamente una regressione, e le scelte sul tipo di merge (merge commit, fast-forward o rebase) influenzano la leggibilità della storia.
 
-\noindent\textbf{Implicazioni operative e suggerimenti}
+Infine, per trarre davvero vantaggio da \emph{Git} servono disciplina e coordinamento (policy per le revisioni, convenzioni condivise, role-based access) oltre a cura nella definizione dei test e nella documentazione delle release. Così, il controllo versione diventa non solo uno strumento tecnico, ma una leva organizzativa per rilasciare con più sicurezza e tracciabilità.
 
-L’adozione di questo insieme di tecnologie determina alcuni vincoli e opportunità operative: la complessità delle integrazioni richiede governance dei \emph{data contracts} e 
-politiche chiare di versioning delle API; le piattaforme \emph{enterprise} come \emph{Salesforce Commerce Cloud} richiedono competenze specifiche per personalizzazioni e upgrade; 
-le risorse cloud implicano attenzione alla gestione dei costi e al monitoraggio del consumo. Per migliorare l’efficacia complessiva è raccomandabile formalizzare convenzioni comuni 
-(naming delle \emph{branches}, standard per le \emph{code review}, soglie di qualità per le \emph{pipeline}) e prevedere un minimo di documentazione operativa a supporto dell’onboarding e della manutenzione.
 
-In conclusione, la suite tecnologica osservata mette a disposizione strumenti potenti per costruire soluzioni integrate e scalabili; la sfida principale risiede nell’armonizzare pratiche, 
-automazioni e governance per trasformare la tecnologia in valore ripetibile e manutenibile nel tempo.
+%\medskip
+
+%\noindent\textbf{Implicazioni operative e suggerimenti}
+
+%L’adozione di questo insieme di tecnologie determina alcuni vincoli e opportunità operative: la complessità delle integrazioni richiede governance dei \emph{data contracts} e 
+%politiche chiare di versioning delle API; le piattaforme \emph{enterprise} come \emph{Salesforce Commerce Cloud} richiedono competenze specifiche per personalizzazioni e upgrade; 
+%le risorse cloud implicano attenzione alla gestione dei costi e al monitoraggio del consumo. Per migliorare l’efficacia complessiva è raccomandabile formalizzare convenzioni comuni 
+%(naming delle \emph{branches}, standard per le \emph{code review}, soglie di qualità per le \emph{pipeline}) e prevedere un minimo di documentazione operativa a supporto dell’onboarding e della manutenzione.
+
+%In conclusione, la suite tecnologica osservata mette a disposizione strumenti potenti per costruire soluzioni integrate e scalabili; la sfida principale risiede nell’armonizzare pratiche, 
+%automazioni e governance per trasformare la tecnologia in valore ripetibile e manutenibile nel tempo.
 
 
 %Per la manutenzione e il supporto operativo si privilegia un approccio a livelli: monitoraggio dei servizi e dei log, 

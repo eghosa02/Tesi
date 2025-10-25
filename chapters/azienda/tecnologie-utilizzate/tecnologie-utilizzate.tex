@@ -5,7 +5,7 @@ consolidate con strumenti e approcci moderni orientati alla scalabilità, all’
 Di seguito viene fornita una descrizione estesa delle tecnologie principali e del loro impatto operativo.
 
 \medskip
-\noindent\textbf{Salesforce Commerce Cloud}
+\noindent\textbf{\emph{Salesforce Commerce Cloud}}
 \emph{Salesforce Commerce Cloud} insieme ai moduli \emph{Service Cloud} e \emph{Marketing Cloud} è una suite pensata per gestire vendite online, assistenza clienti e 
 attività di marketing in modo integrato. Viene usata sia per soluzioni \emph{B2B} che \emph{B2C} e permette di costruire cataloghi prodotti, gestire ordini e mantenere 
 aggiornati i profili dei clienti collegando la piattaforma ad altri sistemi aziendali (per esempio ERP, sistemi di magazzino o gateway di pagamento).
@@ -22,7 +22,7 @@ follow-up post-acquisto e ticket di assistenza) riducendo lavoro manuale e tempi
 
 
 \medskip
-\noindent\textbf{Bloomreach}
+\noindent\textbf{\emph{Bloomreach}}
 \emph{Bloomreach} è una piattaforma pensata per migliorare la ricerca interna e personalizzare la \emph{customer journey} in modo più intelligente e mirato. 
 Viene impiegata soprattutto in progetti di scala per rendere le ricerche sul sito più pertinenti (per esempio mostrando risultati, suggerimenti e filtri che si adattano al contesto dell’utente) 
 e per orchestrare contenuti e offerte personalizzate lungo tutto il percorso di acquisto.
@@ -41,7 +41,7 @@ continuare a fare \emph{testing} () per ottimizzare i risultati.
 \end{figure}
 
 \medskip
-\noindent\textbf{deployment}
+\noindent\textbf{\emph{deployment}}
 Le piattaforme cloud e di \emph{deployment} (ad esempio \emph{AWS}, \emph{Google Cloud} e \emph{Heroku}) vengono utilizzate per ospitare le applicazioni, 
 allocare risorse scalabili e creare ambienti distinti per sviluppo e collaudo (\emph{staging}) e per il traffico reale (\emph{production}). 
 In pratica offrono servizi di \emph{hosting}, \emph{provisioning} delle risorse (CPU, memoria, storage) e strumenti per distribuire il codice in modo ripetibile.
@@ -66,14 +66,21 @@ Per l’infrastruttura è ormai comune l’adozione di pratiche di \emph{infrast
 % [Develop] → [Commit su Git] → [CI Build] → [Test automatici] → [Code review / Pull Request] → [Merge su main] → [Deploy su Staging] → [Verifica] → [Deploy in Production]
 
 \medskip
-\noindent\textbf{iPaaS}
+\noindent\textbf{\emph{iPaaS}}
 Gli strumenti di integrazione includono approcci punto a punto e soluzioni \emph{iPaaS} (\emph{Integration Platform as a Service}: piattaforme per orchestrare integrazioni) 
 che collegano sistemi come \emph{CRM}, \emph{ERP}, piattaforme \emph{e-commerce} e \emph{CMS}. Mentre le integrazioni punto a punto creano connessioni dirette fra singoli sistemi, 
-un \emph{iPaaS} funge da livello centrale che orchestra i flussi di dati e i processi tra più applicazioni, rendendo l’architettura più semplice da governare e manutenere.
+un \emph{iPaaS} funge da livello centrale che orchestra i flussi di dati e i processi tra più applicazioni, rendendo l'architettura più semplice da governare e manutenere.
 
-L’adozione di un \emph{iPaaS} semplifica attività operative come la gestione degli \emph{endpoint} (i punti di scambio dati), la trasformazione dei \emph{payload} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{azienda/iPaaS}
+    \caption{Integrazioni point-to-point vs iPaaS: il diagramma mostra come un iPaaS centralizzi connettori, mapping, gestione errori e monitoring, riducendo la complessità delle integrazioni dirette e accelerando l'onboarding di nuovi sistemi.}
+    \label{fig:iPaaS}
+\end{figure}
+
+L'adozione di un \emph{iPaaS} semplifica attività operative come la gestione degli \emph{endpoint} (i punti di scambio dati), la trasformazione dei \emph{payload} 
 (adattamento dei formati dati), e la gestione degli errori e dei tentativi di retry (meccanismi automatici per riprovare operazioni fallite). 
-Questo riduce la complessità rispetto a molte integrazioni punto a punto e velocizza l’onboarding di nuovi sistemi grazie a connettori riutilizzabili e template di integrazione.
+Questo riduce la complessità rispetto a molte integrazioni punto a punto e velocizza l'onboarding di nuovi sistemi grazie a connettori riutilizzabili e template di integrazione.
 
 Un \emph{iPaaS} permette anche di scegliere fra modalità di integrazione 
 in tempo reale o a batch, impostare regole di mapping dei dati, e centralizzare logging e monitoraggio per individuare rapidamente problemi e colli di bottiglia.
@@ -85,7 +92,7 @@ viene usato per definire le \emph{issue}, assegnare priorità, documentare crite
 è lo strumento preferito per aggiornamenti rapidi e conversazioni sincrone o asincrone tra membri del \emph{team}.
 
 \medskip
-\noindent\textbf{Git}
+\noindent\textbf{\emph{Git}}
 \emph{Git} è il fulcro del controllo versione e del coordinamento del lavoro sul codice: 
 centrale non solo per conservare la storia delle modifiche, ma anche per organizzare come le nuove funzionalità arrivano nel prodotto finito. 
 Nella pratica quotidiana si privilegia un flusso basato su \emph{feature branches} (ognuna per una funzionalità o correzione), 

@@ -1,3 +1,98 @@
 \subsection{Shopify}
 
+La scelta di \emph{Shopify} è stata motivata dalla necessità di disporre di una piattaforma e-commerce robusta, già adottata dall'azienda, che permettesse 
+sia la presentazione dei prodotti agli utenti sia la gestione operativa degli stessi dallo store. Nel PoC si è quindi previsto un'integrazione che coprisse due bisogni principali: 
+(i) mostrare in modo consistente i prodotti presenti nello \emph{store} tramite uno \emph{storefront} accessibile all'agente e all'interfaccia utente; 
+(ii) permettere aggiornamenti lato \emph{store} relativi a prezzo, disponibilità e metadati quando necessario.
+
+Di seguito vengono descritti i dettagli tecnici e le scelte adottate nell'integrazione con \emph{Shopify}, 
+le responsabilità dei vari componenti e le scelte progettuali per garantire sicurezza, performance e tracciabilità.
+
+Architettura di integrazione e API utilizzate — l'integrazione con Shopify è stata realizzata su due livelli distinti ma coordinati:
+\begin{itemize}
+\item \textbf{Storefront API (client-side)}: utilizzata per operazioni che devono avvenire direttamente dal cliente/utente o dall'agente in tempo reale, 
+come la visualizzazione di catalogo, interrogazioni sui prodotti, recupero di varianti e operazioni sul carrello (aggiungi/rimuovi articoli, aggiornamento quantità). 
+Questo approccio permette all'interfaccia lato client e agli agenti conversazionali di effettuare operazioni con latenza minima e senza esporre privilegi di amministrazione.
+\item \textbf{Admin API / private app / app server (server-side)}: utilizzata per le operazioni di aggiornamento dello store 
+(creazione o aggiornamento di prodotti, modifiche di prezzo, gestione inventario, modifica di metafields). 
+Queste operazioni richiedono token con scope elevati e quindi sono eseguite tramite un backend protetto (server o funzione serverless) che espone endpoint sicuri verso il \emph{PoC}. 
+Tutte le chiamate di scrittura passano per questo \emph{layer} di \emph{backend} per proteggere le credenziali e implementare logica aggiuntiva (validazione, trasformazione dati, \emph{audit}).
+\end{itemize}
+
+Autenticazione, scope e gestione dei segreti — i token con privilegi di scrittura non sono mai esposti al client. Nel \emph{PoC} si è adottata la seguente politica:
+\begin{itemize}
+\item uso di token lato server conservati in variabili d'ambiente e, in ambiente aziendale, in secret manager o vault aziendali;
+\item uso di token a lettura limitata per eventuali integrazioni serverless con privilegi minimi;
+\item gestione del flusso OAuth (se necessario per app pubbliche) o app private per development store, con rotazione dei token e log delle operazioni di amministrazione.
+\end{itemize}
+
+Mapping dei dati e coerenza con il CMS — per permettere all'agente di correlare catalogo e contenuti editoriali (gestiti da \emph{Sanity}) è stata definita una strategia di mapping:
+\begin{itemize}
+\item utilizzo di campi identificativi condivisi (SKU, handle/slug, metafields) per collegare entità in Shopify con documenti in Sanity;
+\item sincronizzazione o arricchimento dei dati mediante pipeline: quando un prodotto viene aggiornato in Shopify (es. variazione prezzo o disponibilità) un \emph{webhook} notifica 
+il \emph{backend} che aggiorna l'indice usato dall'agente; viceversa, modifiche nei contenuti editoriali in Sanity possono popolare metafields utili per display o per guide prodotto.
+\end{itemize}
+
+Webhooks, sincronizzazione e strategie di aggiornamento — per mantenere coerenza e ridurre latenza tra store e PoC si sono sfruttati i webhooks (publish/updated/delete/inventory) di Shopify:
+\begin{itemize}
+\item i webhooks innescano pipeline di aggiornamento che normalizzano il payload, aggiornano l'indice di ricerca o il database di riferimento e rigenerano eventuali 
+\emph{embedding} se questi dati sono parte del knowledge base;
+\item per campi critici (prezzi, stock) si è privilegiata la notifica push via webhook e l'interrogazione puntuale dell'Admin API in caso di necessità di conferma.
+\end{itemize}
+
+Operazioni sul carrello e limiti client — l'agente e l'interfaccia utente devono poter svolgere operazioni sul carrello. Queste funzionalità sono state implementate 
+principalmente tramite Storefront \emph{API}, rispettando i seguenti vincoli:
+\begin{itemize}
+\item le operazioni di manipolazione del carrello (add/remove/update) avvengono lato client o tramite endpoint serverless che mediano le chiamate, preservando la sicurezza;
+\item il completamento dell'ordine (checkout e pagamento) non è stato automatizzato dal PoC per motivi di sicurezza e compliance: il flusso prevede la redirezione dell'utente 
+al \emph{checkout} \emph{Shopify} o l'uso di un \emph{checkout} protetto, lasciando la transazione finale all'infrastruttura \emph{Shopify}.
+\end{itemize}
+
+Gestione delle varianti, prezzi e disponibilità — i prodotti in Shopify possono avere varianti con stock e prezzi differenti; per gestire questo:
+\begin{itemize}
+\item l'agente identifica e presenta le varianti rilevanti (es. colore, taglia) esponendo SKU e attributi utili per la scelta;
+\item il PoC prevede la risoluzione dei conflitti di prezzo leggendo i prezzi correnti dallo store in tempo reale quando la freschezza è critica;
+\item per la visualizzazione viene mantenuta una cache controllata per non saturare le API e per migliorare le prestazioni (TTL impostato in base alla volatilità dei dati).
+\end{itemize}
+
+Caching, performance e limiti di rate — per ottimizzare prestazioni e costi si sono adottate politiche di caching lato server e client, con invalidazione guidata da eventi (\emph{webhook}). 
+Inoltre sono state previste logiche di backoff e retry per rispettare i limiti di rate delle API di Shopify e ridurre errori transienti.
+
+Testing, monitoraggio e qualità — il PoC ha previsto attività di validazione su due livelli:
+\begin{itemize}
+\item \textbf{testing automatico e manuale}: test di integrazione che verificano chiamate all'API (mockate in ambiente di sviluppo),
+ test di end-to-end sui flussi di aggiunta al carrello e sulla corretta risoluzione di varianti; uso di strumenti per l'invocazione automatizzata di endpoint 
+ (es. Postman/Newman o test automatizzati);
+\item \textbf{monitoraggio e logging}: tutte le operazioni di scrittura sono state loggate con ID di correlazione per tracciare cambiamenti e agevolare debug; 
+alert su errori critici e metriche di successo delle webhook callback.
+\end{itemize}
+
+Sicurezza, privacy e conformità — considerata la natura dei dati trattati, nel PoC sono state seguite pratiche conservative:
+\begin{itemize}
+\item non memorizzare dati sensibili degli utenti nei log (sanitizzazione);
+\item conformità alla normativa sulla protezione dei dati nel trattamento di eventuali informazioni personali usate nei test (dati sintetici o anonimizzati);
+\item criteri di accesso basati sul principio del minimo privilegio.
+\end{itemize}
+
+Limitazioni e mitigazioni — durante lo sviluppo del PoC sono emerse limitazioni da considerare:
+\begin{itemize}
+\item alcune operazioni amministrative possono richiedere permessi non replicabili in ambienti di produzione senza una review; per questo il PoC ha privilegiato 
+l'uso di ambienti di sviluppo o store di test per le scritture;
+\item la sincronizzazione bidirezionale tra CMS e store può generare condizioni di race: si sono introdotte politiche di reconciliation, timestamping e idempotenza per mitigare conflitti;
+\item il completamento dei pagamenti e la gestione di transazioni reali sono stati lasciati alla piattaforma Shopify per motivi di sicurezza e compliance.
+\end{itemize}
+
+Integrazione con l'agente conversazionale — infine, l'interazione dell'agente con Shopify è stata progettata per massimizzare utilità e sicurezza:
+\begin{itemize}
+\item l'agente può interrogare il catalogo (filtri, ricerca semantica assistita da indici vettoriali) e proporre prodotti coerenti con la conversazione;
+\item può costruire e modificare un carrello virtuale per mostrare all'utente l'impatto di scelte diverse, ma la persistenza finale e il checkout rimangono operazioni gestite dal backend/Shopify;
+\item tutte le risposte che coinvolgono dati sensibili (prezzi speciali, stock limitati, promozioni) richiedono conferma tramite meccanismi server-side prima di essere applicate allo store.
+\end{itemize}
+
+In sintesi, l'adozione di \emph{Shopify} nel PoC ha consentito di sfruttare una piattaforma e-commerce matura per la presentazione e la gestione del catalogo, garantendo al tempo 
+stesso che le operazioni critiche siano eseguite in modo sicuro tramite un livello server-side. La combinazione fra Storefront API per le interazioni in tempo reale e Admin API 
+per le operazioni di aggiornamento, integrata con webhooks, caching e politiche di sicurezza, ha permesso all'agente di offrire funzionalità utili all'utente senza compromettere 
+la sicurezza o la consistenza dei dati nello store.
+
+
 %Sotto-sezione che riporterà la spiegazione e la logica della scelta delle API di Shopify.

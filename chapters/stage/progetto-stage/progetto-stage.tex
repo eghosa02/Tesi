@@ -1,38 +1,63 @@
 \section{Progetto di stage}
 
-%descrizione stage
-Il progetto di \emph{stage} ha come scopo la realizzazione di un prototipo di interfaccia conversazionale
-avanzata per il sito eCommerce di un brand di skincare, basata su architettura agentica.
-Lo \emph{stage} ha avuto come compito, l'intera progettazione, sviluppo e test di un sistema conversazionale che, tramite l'utilizzo
-di \emph{Large Language Models} (\emph{LLM}), \emph{Retrieval-Augmented Generation} ((\emph{RAG})), agenti \emph{software},  \emph{server} \emph{MCP}() e delle \emph{API} di \emph{Shopify}, fosse in grado di:
-Dialogare con il cliente finale per rispondere a domande su brand, prodotti, routine skincare e quant' altro circa il mondo della \emph{skin-care}.
-Interagire con il backend Shopify per reperire dati o eseguire azioni.
-Sfruttare architetture modulari a microservizi per la scalabilità del sistema.
+Il progetto di \emph{stage} ha avuto come obiettivo principale la realizzazione di un prototipo di interfaccia conversazionale avanzata per il sito \emph{e-commerce} di un brand di \emph{skin-care},
+fondata su un’architettura agentica e orientata all’integrazione con i sistemi già in uso presso l’azienda ospitante. 
+L’iniziativa si inserisce all’interno della visione strategica di innovazione dell’organizzazione, che mira a potenziare l’esperienza digitale dei propri clienti e a 
+esplorare le potenzialità offerte dalle più recenti tecnologie basate su intelligenza artificiale generativa.
 
-%problematiche applicative da voler affrontare con il tirocinio
-Tale progetto ha come obbiettivo, riuscire a ridurre notevolmente il carico informativo richiesto all'utente per poter navigare sul sito, per poter consultare e decidere sui prodotti esposti.
-Servizzi come nel caso specifico, quello della \emph{skin-care} peccano di un effetto \emph{overwhelming} indotto all'utente dovuta alla relativa grande quantità d'informazioni da dover assorbire
-anche al solo fine di poter consultare i prodotti presenti nell \emph{e-commerce}.
-Il prgetto dunque mira ha abbattere tale barriera, integrando un sistema intelligente capace di guidare l'utente attraverso la descrizione dei vari prodotti, integrazioni con possibili routine, 
-compatibilità tra prodotti, prodotti mirati per le problematiche riportate testualmente dall'utente, ecc... megliorando di conseguenza anche l' \emph{User Experience} (\emph{UX}).
+Lo \emph{stage} ha previsto un percorso completo che includeva analisi preliminare, progettazione, sviluppo e test di un sistema conversazionale in grado di 
+interagire in linguaggio naturale con gli utenti del sito, fornendo risposte pertinenti, contestuali e coerenti con i contenuti aziendali. Il prototipo è stato progettato 
+per utilizzare un insieme integrato di tecnologie, tra cui \emph{Large Language Models} (\emph{LLM}), \emph{Retrieval-Augmented Generation} (\emph{RAG}), agenti \emph{software}, 
+\emph{server} \emph{MCP} e le \emph{API} di \emph{Shopify}. Tali strumenti consentono all’agente di dialogare con il cliente finale per rispondere a domande su brand, prodotti, 
+routine di \emph{skin-care} e altri argomenti affini, interagendo con il backend per reperire informazioni o eseguire azioni, e sfruttando architetture modulari a 
+microservizi per garantire scalabilità e manutenibilità del sistema.
+
+Dal punto di vista applicativo, il progetto è stato concepito per affrontare un problema concreto del dominio della \emph{skin-care}: la complessità informativa 
+che spesso ostacola l’utente nella navigazione di un catalogo ampio e specializzato. Il fenomeno di \emph{overwhelming}, ossia il sovraccarico cognitivo derivante 
+dall’eccesso di informazioni, rappresenta una delle principali sfide per gli \emph{e-commerce} del settore. Il sistema proposto mira a ridurre tale complessità, 
+fungendo da mediatore intelligente capace di comprendere le richieste dell’utente, fornire spiegazioni, suggerire routine personalizzate, verificare la compatibilità 
+tra prodotti e individuare soluzioni mirate alle esigenze espresse. In questo modo, il progetto contribuisce al miglioramento dell’esperienza utente (\emph{User Experience}, \emph{UX}) 
+e alla valorizzazione del rapporto di fiducia tra cliente e brand.
+
+Lo \emph{stage}, per sua natura esplorativa, non è stato rigidamente vincolato a un insieme fisso di tecnologie o metodologie, ma ha lasciato spazio alla 
+sperimentazione e all’adattamento progressivo. I vincoli principali hanno riguardato l’utilizzo di \emph{Shopify} per la gestione del canale \emph{e-commerce} e di \emph{Sanity} 
+come \emph{CMS}, in quanto piattaforme già adottate dall’azienda ospitante e quindi imprescindibili per garantire compatibilità e continuità con l’infrastruttura esistente. 
+L’obiettivo era infatti quello di sviluppare un prototipo realistico e facilmente integrabile, capace di dimostrare la fattibilità tecnica e il potenziale valore strategico 
+di un sistema conversazionale intelligente.
+
+Dal punto di vista operativo e temporale, il progetto è stato suddiviso in più fasi: una prima fase di studio delle tecnologie e di definizione dei requisiti, 
+una seconda fase di progettazione architetturale e sperimentazione su un \emph{playground}, e infine una fase di sviluppo del \emph{PoC} vero e proprio, con attività di test e validazione. 
+Il lavoro si è svolto in stretto coordinamento con il tutor aziendale, che ha svolto un ruolo chiave di guida e confronto tecnico-strategico, garantendo la coerenza tra 
+le scelte progettuali e la visione di innovazione perseguita dall’azienda. In particolare, il tutor ha contribuito alla definizione del perimetro di sperimentazione e 
+ha condotto in parallelo analisi comparative di tecnologie affini a quelle testate, al fine di valutare concretamente i possibili \emph{trade-off} e ottimizzare i tempi di sviluppo.
+
+L’approccio adottato è stato volutamente “morbido” riguardo agli obiettivi, permettendo di ampliare progressivamente il perimetro del progetto in base ai risultati ottenuti. 
+Tale flessibilità ha favorito una gestione dinamica dello \emph{stage}, nella quale obiettivi iniziali più cauti sono stati progressivamente integrati con traguardi più ambiziosi, 
+mantenendo però un’attenzione costante alla fattibilità e all’efficienza economica. Il vincolo principale, oltre alla compatibilità tecnologica, 
+è stato quello di privilegiare soluzioni semplici, modulabili e pronte alla distribuzione, evitando la tendenza a “reinventare la ruota” e promuovendo invece un approccio pragmatico, 
+centrato sull’utente e orientato al valore concreto per l’azienda.
+
+Questo progetto di \emph{stage} riflette pienamente la strategia di innovazione dell’organizzazione ospitante, che vede negli \emph{stage} 
+e nei progetti sperimentali uno strumento essenziale per esplorare nuove tecnologie, testarne le applicazioni in contesti reali e formare competenze interne. 
+L’azienda, infatti, adotta una visione di innovazione incrementale, basata su iterazioni successive di apprendimento e validazione, piuttosto che su approcci 
+radicali e ad alto rischio. In questa prospettiva, lo \emph{stage} non rappresenta un episodio isolato, ma una parte di un processo più ampio di evoluzione tecnologica, 
+volto a migliorare la competitività del brand attraverso soluzioni digitali sempre più personalizzate e intelligenti.
+
+Le attività di supporto sono state organizzate in modo da garantire continuità e collaborazione costante: briefing iniziali per l’allineamento sugli obiettivi, 
+incontri periodici di revisione, sessioni di confronto tecnico e momenti di verifica intermedia dello stato di avanzamento. Al termine dello \emph{stage}, 
+è stata prevista la consegna di tutta la documentazione tecnica e dei risultati del \emph{PoC}, in modo da permettere all’azienda di proseguire in autonomia lo sviluppo e 
+valutare la possibilità di una futura industrializzazione del prototipo.
+
+In conclusione, il progetto di \emph{stage} ha rappresentato un’occasione concreta per esplorare l’applicazione dell’intelligenza artificiale conversazionale 
+in un contesto reale di \emph{e-commerce}, contribuendo non solo al miglioramento dell’esperienza utente ma anche alla definizione di una visione strategica 
+più ampia per l’azienda ospitante, in linea con la sua continua ricerca di innovazione tecnologica e sostenibilità digitale.
 
 
-%obiettivi specifici prefissati e i vincoli operativi e temporali associati
-Lo \emph{stage} per sua natura non è stato rigido sui vincoli tecnologici in quanto campo relativamente nuovo su cui sperimentare; sono stati invece posti obiettivi circa la produzione di 
-documenti dediti a manifestare uno studio per poi discutere circa le tecnologie da approfondire, la progettazione architetturale e del \emph{PoC} in se e per se.
-L'unico vincolo definibile come tale è stato la scelta di tecnologie tali da essere a favore di una facile distribuzione e dunque uscita nel mercato al fine di costringermi a lavorare in un 
-ottica più prontata al lato dell'utente e economica più che ad una tendenza innata a reinventare la ruota tipica dei neo-laureati.
-Riguardo gli obiettivi, per lo \emph{stage} sono stati posti con un ottica strettamente pessimistica consci del fatto della non chiara deifficolta di essi, in fatti in fase di \emph{stage},
-sono stati inseriti più obiettivi da soddisfare man mano che ultimavo quelli precedentemente dati.
 
-% rapporto tra la proposta di stage e la strategia più ampia dell'ente ospitante in materia di innovazione ()
-Tale approccio 'morbido' sui vincoli e obiettivi non ha reso il progetto di per sè semplice, invece a fatto emergere in chiaro quele fosse l'ottica da avere sul progetto
-e come approcciarlo.
-Il seguente progetto ha richiesto necessariamente una fase di 'gioco' su un (\emph{playground}) al fine di comprendere meglio sul lato pratico le tecnologie più famose circa il contesto
-sui cui ha mirato il progetto e poterle mettere a confronto stile dei pro e contro utili per discriminare alcune tecnologie a favore di altre.
-Tale approccio sperimentale è stato per me una chiara evidenza di un approccio all'innovazione da parte del tutor aziendale anche per il suo approccio nel verificare parallelamente tecnologie
-su carta simil potenti a quelle che sceglievo io al fine di verificare concretamente possibili \emph{trade-off} significativi che senza sperimentazione non sarebbero potuti emergere,
-ottimizzando così il tempo dedicato alla sperimentazione e di conseguenza alla progettazione dell' architettura finale del \emph{PoC}
+
+
+
+
 
 % attività di supporto previste prima, durante e dopo il periodo di tirocinio
 

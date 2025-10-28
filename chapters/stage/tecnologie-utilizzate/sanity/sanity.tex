@@ -1,3 +1,60 @@
 \subsection{Sanity}
 
+La scelta del \emph{CMS} \emph{Sanity} è stata motivata dalla sua natura di content platform strutturata e orientata ai dati, che ben si presta a fungere da fonte di conoscenza 
+primaria per uno o più agenti: offre contenuti versionati, schemi personalizzabili e API che permettono sia accessi \emph{on-demand} sia processi di sincronizzazione automatica. 
+Queste caratteristiche lo rendono adatto al requisito principale del progetto, cioè fornire agli agenti informazioni aggiornate, coerenti e contestualizzate sull'offerta di 
+\emph{Comfortzone} (product sheet, articoli del blog, FAQ, tag e metadati utili alla disambiguazione).
+
+Dal punto di vista operativo, in fase di PoC si è lavorato su più livelli di integrazione con \emph{Sanity}:
+
+• \textbf{Modellazione dei contenuti:} sono stati definiti schemi tipizzati (es. \texttt{product}, \texttt{blogPost}, \texttt{faq}, \texttt{knowledgeArticle}) che includono campi essenziali per 
+il recupero rilevante (titolo, summary, body in \emph{Portable Text}, slugs, categorie, tag, data di pubblicazione, lingua, riferimenti a entità correlate). 
+La struttura a documenti e riferimenti consente di preservare le relazioni tra contenuti (es. articoli che rimandano a prodotti, o guide correlate) 
+e fornisce metadati utili al ranking nella fase di retrieval.
+
+• \textbf{Strategie di accesso ai contenuti:} ho sperimentato due approcci fondamentali per mettere a disposizione le conoscenze agli agenti: 
+(1) interrogazioni runtime direttamente alle \emph{Content API} di \emph{Sanity} tramite query (GROQ) per ottenere risposte sempre fresche; 
+(2) sincronizzazione periodica dei contenuti in un indice dedicato (generazione di embedding e memorizzazione in un database vettoriale) 
+per abilitare retrieval semantico e risposte a bassa latenza. Nel PoC è stato adottato un approccio ibrido: per contenuti che richiedono massima freschezza 
+(es. aggiornamenti di prezzo, articoli pubblicati recentemente) si interrogano le API in tempo reale; per la parte di conoscenza generale e di lunga forma (articoli del blog, guide) 
+si preferisce il retrieval su indice vettoriale per sfruttare il semantic matching.
+
+• \textbf{Pre-elaborazione e chunking:} i documenti di lunghezza estesa (post del blog, guide tecniche) sono stati suddivisi in porzioni contestuali (chunk) 
+basate su intestazioni e paragrafi per migliorare la granularità del retrieval. A ogni chunk è stato associato un set di metadati 
+(document id, heading, posizione nel documento, data di aggiornamento, lingua) utili per la ricostruzione della risposta e per il contesto da fornire al modello di linguaggio nel prompt.
+
+• \textbf{Webhook e sincronizzazione incrementale:} per mantenere aggiornato l'indice vettoriale e per ridurre la latenza della propagazione delle modifiche, sono stati sfruttati i 
+\emph{webhook} di \emph{Sanity} attivati su eventi di publish/update/delete. Il webhook innesca una pipeline che estrae il contenuto, lo normalizza 
+(conversione da \emph{Portable Text} a \emph{plain text} / \emph{markdown} quando necessario), 
+rigenera gli \emph{embedding} e aggiorna l'indice. 
+Questo approccio minimizza la finestra di inconsistenza tra \emph{CMS} e motore di retrieval, mantenendo però il traffico API sotto controllo.
+
+• \textbf{Preview, draft e controllo delle versioni:} la possibilità di gestire draft e preview in \emph{Sanity} 
+ha permesso di testare l'interazione dell'agente anche su contenuti non ancora pubblicati, simulando scenari di anteprima e validazione con il tutor aziendale. 
+Le versioni e gli slug coerenti con la staging strategy facilitano il collegamento fra ambiente di sviluppo e produzione.
+
+• \textbf{Sicurezza e gestione delle credenziali:} sono state definite best practice per l'utilizzo dei token: token di lettura a \emph{scope} ristretto esposti solo lato \emph{server}
+ o tramite funzioni serverless, token di gestione salvati in vault o variabili d'ambiente e file di esempio (\texttt{.env.example}) versionati per documentare la procedura di \emph{setup}. 
+ È stata posta attenzione alle policy CORS e ai limiti di rate delle API per evitare interruzioni durante il testing.
+
+• \textbf{Integrazione con altre componenti:} grazie alle API e all'Image API di \emph{Sanity} è stato possibile integrare contenuti multimediali con trasformazioni \emph{on-the-fly} 
+(utile per generare preview leggibili dall'agente o per fornire immagini ottimizzate). Inoltre, la relazione con \emph{Shopify} è stata gestita mappando entità condivise (codici prodotto, \emph{slug}) 
+per permettere all'agente di correlare informazioni di catalogo e contenuti editoriali.
+
+• \textbf{Metriche e valutazione qualitativa:} durante la fase di sperimentazione nel \emph{playground} sono state misurate qualitativamente latenza di risposta, 
+copertura informativa (percentuale di query dell'agente risolvibili con i contenuti disponibili) e qualità delle risposte (coerenza e aggiornamento). 
+Queste osservazioni hanno guidato le scelte successive (es. maggior uso di embedding per il blog, uso di \emph{query} \emph{runtime} per dati volatile).
+
+\paragraph{Vantaggi e limiti osservati} L'utilizzo di \emph{Sanity} ha permesso di centralizzare la conoscenza aziendale in un formato strutturato, 
+favorendo tracciabilità, controlli di versione e facilità di integrazione con pipeline di RAG. Tuttavia sono emersi limiti pratici: la necessità di normalizzare 
+\emph{Portable Text} per embedding di qualità, la gestione di contenuti duplicati che possono inficiare il ranking del retrieval e la necessità di bilanciare freschezza e costi \emph{API}. 
+Le soluzioni adottate (chunking intelligente, metadati espliciti, webhook per sincronizzazione incrementale) hanno mitigato gran parte di questi problemi nel contesto del \emph{PoC}.
+
+In conclusione, \emph{Sanity} si è rivelato un componente centrale e flessibile per la realizzazione del PoC: ha garantito una fonte autorevole e manutenibile di contenuti per gli agenti, 
+consentendo sperimentazioni rapide nel \emph{playground} e strategie di integrazione adeguate alle esigenze di freschezza, accuratezza e performance del progetto.
+
+
+
+
+
 %Sotto-sezione che riporterà la spiegazione e la logica della scelta del CMS Sanity.

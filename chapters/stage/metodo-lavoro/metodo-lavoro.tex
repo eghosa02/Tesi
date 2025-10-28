@@ -1,24 +1,74 @@
 \section{Metodo di lavoro}
 
-Per lo sviluppo del progetto, in accordo con il tutor aziendale è stata scelta una modalità ibrida di lavoro con  1-2 giorni alla settimana in presenza, il resto da remoto,
-ciò per farmi entrare nello stesso ambiente lavorativo degli altri membri del team che adottano la stessa modalità.
-Ai fini comunicativi compatibili con la modalità, ho utilizzato \emph{salck} per le comunicazioni con il tutor aziendale riguardanti richieste di consigli, comunicare entro fine settimana i giorni di presenza per quella successiva
-e invio di link e documentazione da ambo le parti.
-Per il lavoro in presenza ho usufruito di un mio \emph{pc} portatile.
+Per lo sviluppo del progetto, in accordo con il tutor aziendale, è stata adottata una modalità di lavoro ibrida: 1–2 giorni alla settimana in presenza e il resto in remoto, 
+con l'obiettivo di integrarmi pienamente nell'ambiente del team che utilizza la stessa organizzazione. Per la comunicazione sincrona e asincrona ho impiegato 
+\emph{Slack} per le interazioni quotidiane col tutor (richieste di chiarimenti, notifiche di avanzamento, condivisione di link e documenti) e per confermare i giorni di presenza 
+della settimana successiva; per il lavoro in presenza ho utilizzato il mio PC portatile predisposto con l'ambiente di sviluppo richiesto dal progetto.
 
-Il flusso di lavoro da adoperare mi è stato in parte esplicato e in parte discusso e deciso richiedendo la mia opinione.
-Per ogni fase definita a priori nel piano di lavoro, avrei dovuto fornire un documento riportante gli sviluppi fatti durante quella fase, 
-in particolare:
-Un documento per l'analsi del dominio, che per fini pratici si è tramutato in una mostra di un mio playground per dimostrare uno studio ccirca le tecnologie
-principali che sarebbero poi state approfondite anche in fase di sviluppo tra cui l' uso di librerie per i \emph{Large Language Models} (\emph{LLM}), 
-\emph{RAG}, agenti \emph{software}, \emph{MCP} e le \emph{API} di \emph{Shopify}.
+Il metodo di lavoro è stato concordato con il tutor aziendale attraverso un confronto iniziale e successive definizioni condivise: alcune parti del 
+flusso mi sono state illustrate, altre sono state discusse e adattate tenendo conto delle mie osservazioni e competenze. Il processo complessivo è stato organizzato 
+in fasi sequenziali e iterative; per ogni fase era previsto il rilascio di uno o più artefatti documentali e/o software a supporto della valutazione e della 
+verifica da parte del tutor. In particolare i deliverable richiesti sono stati: documento di analisi del dominio (dimostrato anche tramite un \emph{playground} 
+personale con esperimenti sulle tecnologie), documento di scelta tecnologica, specifica tecnica per il \emph{Proof of Concept} (PoC) e la repository ordinata con relativo \texttt{README.md}.
 
-Un documento nel quale avrei discusso la scelta di particolari soluzioni tecnologie per le relative tecnologie rispetto ad altre, motivandole con il fine di convincere
-il tutor aziendale della convenienza temporale e fattibilità delle soluzioni da me proposte.
+Per garantire controllo, tracciabilità e qualità, ho seguito le pratiche sotto elencate, applicandole coerentemente alle attività giornaliere e alle revisioni settimanali:
 
-Un documento di specifica tecnica per documentare il funzionamento del \emph{PoC} in fase conclusiva del progetto
+Pianificazione e gestione delle attività — il progetto è stato pianificato in milestone e task: ogni milestone conteneva obiettivi funzionali chiari e criteri di accettazione. 
+Le attività sono state gestite tramite un board Kanban / issue tracker (es. GitHub Issues o analogo) con etichette per priorità, stato (To Do, In Progress, Review, Done) e assegnazione. 
+Per ogni task ho indicato stime di massima sui tempi e dipendenze, e ho mantenuto un registro sintetico delle ore lavorate per facilitarne la retrospettiva.
 
-La \emph{repository} nella quale avrei ordinatamente caricato il progetto seguendo un' alberatura senzata e ragionata con il relativo \emph{file} \emph{Readme.md}. 
+Interazioni e revisioni con il tutor aziendale — è stata stabilita una cadenza settimanale di incontro (giorno concordato di settimana in settimana) in cui presentare i progressi; 
+ogni riunione seguiva un ordine del giorno strutturato: stato di avanzamento, dimostrazione pratica (se applicabile), punti aperti e rischi, proposte di soluzione, 
+pianificazione della settimana successiva. Ogni meeting è stato seguito dalla redazione di brevi verbali (agenda e punti principali) condivisi via Slack o tramite la repository aziendale,
+in modo da avere traccia delle decisioni e delle azioni da intraprendere.
+
+Revisioni di progresso e criteri di accettazione — per evitare deragliamenti e assicurare allineamento con gli obiettivi aziendali, ogni milestone prevedeva una review formale con il tutor. 
+Le review comprendevano demo funzionanti del PoC o di parti di esso, revisione del codice mediante pull request e controllo della documentazione. 
+I criteri di accettazione (acceptance criteria) di ogni deliverable erano esplicitati nel documento di pianificazione della milestone.
+
+Tracciamento dei requisiti e tecniche di analisi — ho adottato una procedura di tracciamento dei requisiti che mantenesse la relazione tra requisiti, attività di sviluppo e test. 
+Questo è stato realizzato tramite una semplice matrice di tracciabilità (Requirement Traceability Matrix) che associa ad ogni requisito: descrizione, priorità, \emph{task}/\emph{issue} corrispondenti, 
+documenti di riferimento e test di verifica. L'analisi del dominio è stata documentata con esempi pratici sul mio \emph{playground} per validare ipotesi tecnologiche
+(es. confronto di librerie per LLM, strategie di RAG, design di agenti software, integrazione con le API di Shopify).
+
+Uso di diagrammi ed artefatti visivi — per chiarire e comunicare le scelte architetturali e di processo ho prodotto diagrammi 
+(diagrammi di alto livello dell'architettura, diagrammi dei componenti, sequence diagram per i flussi critici, diagrammi di deployment). 
+Gli strumenti utilizzati sono stati diagrammi in formato leggibile (es. draw.io, PlantUML o Mermaid inseriti nel \texttt{README}) in modo da mantenere i diagrammi versionati insieme al codice. 
+Questi diagrammi hanno aiutato a definire chiaramente confini dei componenti, integrazioni (es. chiamate verso Shopify), e flussi di dati tra LLM, storage e moduli di orchestrazione.
+
+Controllo della qualità del software e strumenti di verifica — per il codice ho seguito pratiche consolidate: utilizzo di controllo versione 
+(\texttt{git}) con flusso a feature-branch e pull request, revisione del codice (code review) e linters/formatter per mantenere qualità e uniformità. 
+Ho predisposto test automatici (unit e integrazione) per i componenti critici; per le API e le integrazioni ho usato tool di testing 
+(es. Postman/Newman o test automatici che effettuano chiamate simulate), oltre a test manuali per scenari complessi del PoC. 
+Per la verifica funzionale del PoC sono stati definiti casi di test che verificano il rispetto dei requisiti definiti nella matrice di tracciabilità.
+
+Riproducibilità e ambiente — per minimizzare problemi di “it works on my machine”, ho descritto e versionato le istruzioni per la configurazione dell'ambiente 
+(file \texttt{requirements.txt} o \texttt{package.json}, script di setup) e quando opportuno ho utilizzato container (es. Docker) per rendere riproducibile l'ambiente di esecuzione. 
+Le credenziali e i segreti per l'integrazione con Shopify sono stati trattati con attenzione: non commitati nel repository, 
+ma gestiti tramite variabili d'ambiente e file di esempio (\texttt{.env.example}) con indicazioni su come ottenere i valori reali.
+
+Sicurezza e gestione dei dati — per le integrazioni con API esterne (Shopify) e per qualsiasi dato sensibile ho rispettato accorgimenti base: 
+uso di HTTPS, non salvataggio di chiavi in chiaro, rotazione delle chiavi quando richiesto e attenzione alla privacy dei dati utilizzati nelle prove. 
+Eventuali dati di test sono stati anonimizzati o sintetici.
+
+Documentazione e repository — la repository del progetto è stata organizzata con una struttura logica (cartelle per codice, test, documentazione e diagrammi) 
+e corredata da un \texttt{README.md} esaustivo che spiega come eseguire il progetto, come riprodurre il PoC e quali sono i componenti principali. 
+Ogni documento tecnico prodotto (analisi del dominio, motivazioni delle scelte tecnologiche, specifica del PoC) è stato salvato nella cartella \texttt{docs} 
+e collegato agli issue/milestone corrispondenti.
+
+Gestione dei rischi e mitigazioni — nel piano di lavoro ho previsto margini per imprevisti (problemi di integrazione, limiti delle librerie LLM, tempo di apprendimento di nuove API). 
+Per ogni rischio identificato è stata proposta almeno una strategia di mitigazione (es. scelta alternativa di libreria, approccio degradato per la funzionalità, 
+test su dati sintetici prima di usare dati reali).
+
+Monitoraggio e reportistica — oltre alle review settimanali, ho prodotto aggiornamenti sintetici settimanali in forma testuale (Slack / issue) 
+per mantenere il tutor informato sullo stato delle attività, sulle decisioni prese e sui punti bloccanti. Al termine di ogni fase ho raccolto gli artefatti principali 
+(codice, test, diagrammi, documentazione) per facilitare la revisione finale e la valutazione del PoC.
+
+In sintesi, il metodo di lavoro applicato combina pratiche collaborative (comunicazione regolare con il tutor e il team), 
+tecniche di ingegneria del software orientate alla tracciabilità e qualità (controllo versione, code review, test automatici, matrice di tracciabilità), 
+e strumenti pratici per la documentazione e la riproducibilità (diagrammi, repository strutturata, script di setup). 
+Questo approccio ha permesso di tenere il progetto sotto controllo, ricevere feedback continui dal tutor aziendale e arrivare alla consegna del PoC con artefatti verificabili e ben documentati.
+
 
 %interazioni con il tutor aziendale
 

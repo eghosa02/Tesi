@@ -1,4 +1,20 @@
 \subsection{Architettura applicazione}
 
-Sotto-sezione che riporterà la descrizione arichietturale dell'applicazione con citate tutte le componenti architetturali principali e descritto come si legano tra loro.
-Verrà riportato un diagramma rappresentativo del flusso dell'applicazione.
+L'architettura si pone come \emph{headless} (lato \emph{backend} e \emph{frontned} separati) con comunicazioni via \emph{API} tra lo \emph{storefront} in \emph{Hydrogen} 
+ed il backend in \emph{Fast API}.
+
+\paragraph{\textbf{backend}}
+Il \emph{backend} si struttura dalla logica riguardante il sistema multiagente con l'uso del \emph{framework} \emph{ADK} e \emph{Fast API}.
+Le chiamate alle relative \emph{API} avvengono tramite le relative \emph{function callings} da parte dell'agente, senza una dichiarazione esplicita nel flusso di chiamate dei \emph{tools}.
+
+%descrizione dell'architettura su cui si è implementato il sistema multi agente con adk
+%accenno a fast api
+%descrizione della logica delle chiamate via API a Sanity e Shopify
+%descrizione della logica delle chiamate via API a pinecone
+
+\paragraph{\textbf{frontend}}
+Lo \emph{storefront} esegue chiamate \emph{http} all'unico endpoint gestito lato \emph{Fast API} per la comunicazione con il \emph{framework} \emph{ADK}.
+%descrizione dell'architettura su cui si è implementato lo storefront
+
+%Sotto-sezione che riporterà la descrizione arichietturale dell'applicazione con citate tutte le componenti architetturali principali e descritto come si legano tra loro.
+%Verrà riportato un diagramma rappresentativo del flusso dell'applicazione.

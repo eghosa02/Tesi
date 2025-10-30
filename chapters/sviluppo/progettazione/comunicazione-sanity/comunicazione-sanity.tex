@@ -1,3 +1,32 @@
-\subsection{Comunicazione con sanity}
+\subsection{Comunicazione con Sanity}
+% descrizione delle funzione per cui la comunicazione con sanity serva (fare query groq, ritornare i prodotti, ritornare info dal blog ecc...)
+La comunicazione con Sanity consente di:
+\begin{itemize}
+  \item eseguire query GROQ per recuperare documenti arbitrari dal dataset;
+  \item effettuare ricerche semantiche su indici di embedding per prodotti e post del blog;
+  \item ottenere informazioni dettagliate su singoli prodotti o insiemi di prodotti rilevanti;
+  \item recuperare metadati specifici (es.\ URL delle immagini dei prodotti) per arricchire l’esperienza utente.
+\end{itemize}
 
-Sotto-sezione che riporterà la descrizione delle comunicazione con le API di Sanity da parte del sistema.
+Operativamente, vengono usati endpoint Sanity per query dati (\texttt{\detokenize{/data/query/...}}), per interrogazioni su indici di embedding (\texttt{\detokenize{/embeddings-index/query/...}}) e, ove necessario, per prompt agent assistiti da LLM (\texttt{\detokenize{/agent/action/prompt/...}}).
+
+% descrivere come tali richieste vengano soddisfatte tramite le function-calling da parte dell'agente
+Le richieste vengono soddisfatte tramite \emph{function-calling} orchestrato dall’agente LLM. 
+Nella definizione dell’agente (\texttt{\detokenize{root_agent}}) i tool Python sono registrati come funzioni invocabili; 
+il modello seleziona dinamicamente il tool più adatto in base all’intento dell’utente (es.\ “trovami due post correlati a X” → ricerca su embedding e poi GROQ per i dettagli). 
+Il flusso tipico è:
+\begin{enumerate}
+  \item il modello sceglie il tool in base all’intento (blog/prodotti/GROQ libero/immagini);
+  \item il tool effettua la chiamata HTTP a Sanity (embedding o GROQ);
+  \item i risultati sono riportati all’agente che li formatta e li restituisce alla UI.
+\end{enumerate}
+
+% elenca i tool specifici e cosa fanno
+Tool esposti all’agente per Sanity:
+\begin{itemize}
+  \item \texttt{\detokenize{sanity_request(query: str)}}: esegue una query GROQ arbitraria sul dataset e ritorna il risultato grezzo.
+  \item \texttt{\detokenize{sanity_blog(query: str)}}: ricerca semantica su indice di embedding per post; seleziona i primi 2 documenti più rilevanti e ne ritorna i dati completi via GROQ.
+  \item \texttt{\detokenize{sanity_ecommerce(query: str)}}: ricerca semantica per prodotti; ritorna fino a 5 prodotti rilevanti con i relativi dettagli via GROQ.
+  \item \texttt{\detokenize{sanity_product(query: str)}}: ricerca semantica focalizzata su un singolo prodotto e ritorno dei suoi dati completi via GROQ.
+  \item \texttt{\detokenize{sanity_get_product_image(products_name: list[str])}}: dato l’elenco di nomi esatti, esegue GROQ per ottenere in modo sicuro gli URL delle immagini dei prodotti.
+\end{itemize}

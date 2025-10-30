@@ -1,4 +1,62 @@
 \subsection{Architettura storefronte}
+Hydrogen è il \emph{framework} di Shopify per la realizzazione di storefront headless basati su React, pensato per integrare in modo nativo API Shopify e ottimizzazioni per l’e-commerce. 
+Il progetto utilizza il router React, Vite per il bundling e una struttura a \emph{route} file-based che facilita la separazione tra pagine, componenti e librerie di supporto.
 
-Sotto-sezione che riporterà la descrizione dell'architettura sviluppata per lo storefront.
-verranno descritti le componenti, le classi e le interazioni tra loro.
+\paragraph{\textbf{perché}}
+La scelta del \emph{framework} non è stata guidata dalla preferenza per una tecnologia o un \emph{pattern} specifico, ma dall’obiettivo pratico di ricreare un ambiente quanto più simile 
+a quello già in uso in \emph{ComfortZone}. Sapendo che per il \emph{rebranding} di \emph{ComfortZone} il \emph{team} stava adottando \emph{Hydrogen}, ho deciso di sviluppare 
+il \emph{PoC} con \emph{Hydrogen} come \emph{storefront}, così da favorire la riusabilità e ridurre i tempi di allineamento in futuro.
+
+\paragraph{\textbf{come}}
+L’alberatura del \texttt{frontend} è organizzata come segue:
+\texttt{\emph{app/routes}}: definisce le pagine (es. \texttt{\emph{chat.tsx}}, \texttt{\emph{products.\$handle.tsx}}, \texttt{\emph{cart.tsx}}, 
+\texttt{\emph{search.tsx}}).
+\texttt{\emph{app/components}}: raccoglie i componenti visivi riutilizzabili 
+(es. \texttt{\emph{Header.tsx}}, \texttt{\emph{Footer.tsx}}, 
+\texttt{\emph{MessageHtml.tsx}}, elementi di prodotto e carrello).
+\texttt{\emph{app/lib}}: contiene funzioni e \emph{hook} di supporto (es. \texttt{useChatStorage.ts} per la gestione dello stato chat, \texttt{\emph{getCartIdFromCookies.ts}} per l’ID carrello, 
+\texttt{\emph{i18n.ts}}, \texttt{\emph{search.ts}}).
+\texttt{\emph{app/graphql}}: definisce query e mutazioni per l’account cliente.
+\texttt{\emph{entry.client.tsx}}, \texttt{entry.server.tsx}, \texttt{root.tsx}: punti d’ingresso e \emph{shell} applicativa.
+L’architettura distingue:
+componenti visivi (\emph{UI} e \emph{layout});
+componenti funzionali (gestione stato, logica asincrona/streaming);
+componenti di comunicazione (chiamate \emph{HTTP} verso i servizi esterni).
+Essendo \emph{Hydrogen} un \emph{framework} \emph{component-based}, la composizione delle pagine avviene componendo elementi \emph{UI} atomici con \emph{hook} applicativi e funzioni di servizio; 
+le \emph{route} orchestrano la vista e delegano a \emph{lib} e componenti la logica di dettaglio.
+
+\paragraph{\textbf{componenti visivi}}
+I componenti visivi implementano la presentazione e la \emph{UX} coerente:
+\texttt{\emph{Header}}, \texttt{\emph{Footer}}, \texttt{\emph{PageLayout}}: struttura e navigazione.
+Componenti prodotto e carrello: \texttt{\emph{ProductImage}}, \texttt{\emph{ProductPrice}}, \texttt{\emph{ProductForm}}, \texttt{\emph{CartMain}}, \texttt{\emph{CartSummary}}, ecc.
+\texttt{\emph{MessageHtml}}: responsabile del rendering sicuro del contenuto messaggi nella chat, supportando testo progressivo/HTML e differenziazione per ruolo (utente/assistente).
+Nella pagina \texttt{\emph{chat.tsx}}, la \emph{UI} mostra:
+lista dei messaggi con \emph{bubble} differenziate per ruolo e stato;
+stato di digitazione/streaming dell’agente;
+metadati come funzioni invocate e tempo di elaborazione, resi in coda al messaggio.
+
+\paragraph{\textbf{componenti funzionali}}
+La gestione dello stato della chat è incapsulata in \texttt{useChatStorage} (\texttt{app/lib/useChatStorage.ts}), che fornisce:
+\texttt{\emph{sessionId}}, \texttt{\emph{messages}}, \texttt{\emph{messagesRef}};
+\texttt{\emph{addMessages}}, \texttt{\emph{setMessages}}, \texttt{\emph{handleClearChat}}.
+La pagina \texttt{\emph{chat.tsx}} coordina il ciclo di vita della richiesta e dello \emph{stream}:
+prepara due messaggi: quello dell’utente e un segnaposto dell’assistente in \emph{loading};
+aggiorna incrementalmente il messaggio dell’assistente tramite funzioni come \texttt{appendTokenToLoading} (per i token di testo), 
+\texttt{appendLogToLoading} (per i log/timings) e \texttt{addFuncCallToLoading} (per le chiamate funzione riportate dall’agente);
+al termine, sostituisce lo \emph{streaming} con il contenuto finale e chiude lo stato di \emph{loading}.
+
+\paragraph{\textbf{chiamate}}
+Le chiamate \emph{HTTP} sono eseguite dalla \texttt{\emph{route}} \texttt{\emph{chat.tsx}} tramite \texttt{\emph{fetch}} verso il servizio applicativo 
+(\texttt{http://localhost:8000/run}), inviando:
+il testo utente (inserito in un payload strutturato),
+\texttt{\emph{session\_id}} dalla gestione locale della sessione,
+\texttt{\emph{cartId}} ricavato da \texttt{getCartIdFromCookies} per il contesto e-commerce.
+La risposta è uno \emph{stream} testuale processato via \emph{ReadableStream}:
+linee con prefissi semantici pilotano l’aggiornamento \emph{UI}:
+\texttt{\emph{LOG}:} aggiorna i \emph{timings}/log del messaggio in \emph{loading};
+\texttt{\emph{TOKEN}:} aggiunge testo parziale al contenuto in \emph{streaming} (effetto “digitazione”);
+\texttt{\emph{FUNC\_CALL}:} registra funzioni invocate dall’agente;
+\texttt{\emph{FINAL}:} contiene JSON con campi come \texttt{\emph{output}}, \texttt{\emph{func\_calls}}, \texttt{\emph{time\_spent}}, usati per consolidare il messaggio finale.
+la gestione degli errori disattiva il \emph{loading} e visualizza un messaggio di fallimento.
+Questa separazione tra presentazione, logica di stato e comunicazione consente riusabilità dei componenti, testabilità della logica asincrona e 
+un’esperienza utente reattiva durante lo \emph{streaming} dei contenuti.

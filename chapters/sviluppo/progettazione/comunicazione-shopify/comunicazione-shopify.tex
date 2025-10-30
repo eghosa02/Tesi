@@ -1,3 +1,28 @@
 \subsection{Comunicazione con shopify}
-
-Sotto-sezione che riporterà la descrizione delle comunicazione con le API di Shopify da parte del sistema.
+% descrizione delle funzione per cui la comunicazione con shopify serva (ritornare il carrello, operazioni di rimozione, aggiunta e update al carrello, link al checkout, ecc...)
+La comunicazione con Shopify espone operazioni e-commerce:
+interrogare il carrello (prodotti, quantità, sottototale) via Storefront API
+aggiungere prodotti al carrello (slug o variant ID)
+aggiornare le quantità delle righe
+rimuovere righe per completare il carrello finale
+ottenere il link di checkout
+Le risposte includono lo stato aggiornato del carrello per mostrarlo all’utente.
+% descrivere come tali richieste vengano soddisfatte tramite le function-calling da parte dell'agente
+Le richieste sono soddisfatte tramite \emph{function-calling}. I tool Python (mutation/query) sono registrati nell’agente. 
+L’LLM seleziona il tool in base all’intento (es. “aggiungi prodotto Y”, “mostra carrello”, “link checkout”). 
+Le mutazioni usano \emph{GraphQL} invocate via \texttt{requests.post} con autenticazione via \texttt{X-Shopify-Storefront-Access-Token}. 
+I risultati JSON sono processati e passati all’agente per la risposta in linguaggio naturale.
+% elenca i tool specifici e cosa fanno
+Tool esposti:
+\verb|get_cart_shopify_agent(cart_id: str)|: \emph{query GraphQL} per id, titoli, quantità; ritorna sottototale.
+\verb|add_cart_shopify_agent_by_slug(cart_id: str, items: list)|: trasforma slug in variant ID (endpoint Shopify JSON); aggiunge con \texttt{cartLinesAdd} e ritorna carrello aggiornato.
+\verb|add_cart_shopify_agent_by_variantIds(cart_id: str, items: list)|: aggiunge direttamente da variant ID; ritorna carrello aggiornato.
+\verb|update_cart_lines_shopify_agent(cart_id: str, items: list)|: mutazione \texttt{cartLinesUpdate} per righe esistenti; ritorna carrello aggiornato.
+\verb|remove_cart_lines_shopify_agent(cart_id: str, line_ids: list)|: mutazione \texttt{cartLinesRemove}; ritorna carrello aggiornato.
+\verb|get_cart_line_ids_shopify_agent(cart_id: str)|: query per gli ID riga del carrello.
+\verb|get_checkout_link(cart_id: str)|: query per l’URL di checkout.
+\verb|get_variant_ids_by_product_id(product_ids: list[int])|: conversione product ID → variant ID (fino a 100 varianti); supporto per prodotti multi-variante.
+Funzioni interne:
+\verb|get_variantId(product_names: list[str])|: recupero slug via JSON API Shopify; mapping a variant ID.
+% Sotto-sezione che riporterà la descrizione delle comunicazione con le API di Shopify da parte del sistema.
+% Riepilogando: le API (Storefront GraphQL e JSON) sono incapsulate nei tool; l’agente sceglie il tool corretto, le invocazioni usano GraphQL con POST e Bearer; le risposte JSON espongono lo stato aggiornato del carrello; il flusso garantisce coerenza tra dati Sanity, Shopify e UI Hydrogen.
